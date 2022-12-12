@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Email Checker - Verify Email Address Online</title>
+
+    <!-- other meta tags -->
+    <meta
+      name="description"
+      content="Email Checker is a free email verification tool.
+      It helps you validate any email address online for free. Check if mailbox really exists."
+    />
+
+    <!-- styles -->
+    <link href="css/style-v3.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="images/ecn_favicon.png" rel="shortcut icon" type="image/png" />
+    <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      td,
+      th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- header starts here -->
+    <div class="container">
+      <nav class="tiny-nav" id="tinyNavTop">
+        <a href="/" class="brand">
+          <img src="images/ecn_logo.png" alt="logo" />
+        </a>
+
+        <span class="menu-icon" onclick="openNav()">☰ MENU</span>
+        <div id="mySidenav" class="sidenav">
+          <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">×</a>
+          <ul>
+            <li><a href="/" class="active">Home</a></li>
+            <!-- <li><a href="https://rapidapi.com/mr_admin/api/email-verifier" target="_blank" title="API">API</a> </li> -->
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <!-- end of header -->
+
+    <!-- main content -->
+    <div class="container">
+      <div class="content">
+        <!-- title -->
+        <div class="title">
+          <h1>Email Checker</h1>
+          <p class="subtitle"><em>A simple tool to check whether an email address exists.</em></p>
+        </div>
+
+        <div class="main">
+          <div class="flex-default">
+            <div class="option">
+              <form class="tiny-form" id="mainForm" action="/check-mail" method="post">
+                <label for="ltrInput" class="text-lighter">Email Address</label>
+                <div class="input-wrapper">
+                  <textarea rows="4" cols="50" type="text" name="emails" id="ltrInput" placeholder="name@example.com" autocorrect="off" spellcheck="false" autocomplete="off" required></textarea>
+
+                  <a href="javascript:clearInput()" class="hide" id="clearIconBtn"><span id="clear-icon">✘</span></a>
+                </div>
+                <div class="button-wrapper">
+                  <input type="hidden" name="_csrf" value="37mJxHuhWmaKOXYd9SXl-1nJ0VjOcMHwfHK5Qnau894" />
+                  <button type="submit" class="tiny-button button-primary">Check</button>
+                  <!-- <button type="button" class="tiny-button" id="advButton">Options</button> -->
+                </div>
+              </form>
+            </div>
+
+            <div class="option" id="result-box">
+              <%if (!initPage){ %>
+              <table>
+                <tr>
+                  <th>Mail</th>
+                  <th>is_existed</th>
+                </tr>
+
+                <% for (var i = 0; i < listMail.length; i++) { %>
+                <tr>
+                  <td><small> <%= listMail[i].mail %></small></td>
+                  <td><%= listMail[i].isExist %></td>
+                </tr>
+                <% } %>
+              </table>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <!-- main -->
+        <h2>What is Email Checker ?</h2>
+
+        <p>Email Checker is a simple little tool for verifying an email address. It's free and quite easy to use. Just enter the email address and hit the check button. It tells you whether the email id is real or fake. Sometimes, it’s unable to correctly predict and say unknown because some email providers have put some limits and restrictions or they simply don’t like any verification checks on their mailboxes.</p>
+
+        <h2>How do we verify an email ?</h2>
+        <ul>
+          <li>First it checks for email address format.</li>
+          <li>Then make sure that domain name is valid. We also check whether it’s a disposable email address or not.</li>
+          <li>In the final step, It extracts the MX records from the domain records and connects to the email server (over SMTP and also simulates sending a message) to make sure the mailbox really exists for that user/address. Some mail servers do not cooperate in the process, in such cases, the result of this email verification tool may not be as accurate as expected.</li>
+        </ul>
+
+        <p>
+          <strong>Help us improve this site</strong> <br />
+          If you have any suggestion/idea for improving this website or adding new feature or something, feel free to email us.
+        </p>
+      </div>
+      <!-- content -->
+    </div>
+
+    <!-- container -->
+
+    <!-- page execution time: 0.04945 -->
+
+    <!-- footer starts here -->
+
+    <!-- footer ends here -->
+
+    <script>
+      // console.log("hello");
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+      }
+
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+      }
+
+      function clearInput() {
+        document.getElementById("ltrInput").value = "";
+        document.getElementById("clearIconBtn").classList.add("hide");
+      }
+
+      function showClearIcon() {
+        inputTextLength = document.getElementById("ltrInput").value.length;
+        if (inputTextLength > 0) {
+          document.getElementById("clearIconBtn").classList.remove("hide");
+        }
+      }
+
+      let textInputBox = document.getElementById("ltrInput");
+      if (textInputBox) {
+        textInputBox.oninput = showClearIcon;
+      }
+
+      let advBtn = document.getElementById("advButton");
+      if (advBtn) {
+        advBtn.onclick = handleAdvOptions;
+      }
+
+      function scrollToTop() {
+        var targetDiv = document.getElementById("scrollMarkerTop");
+        targetDiv.scrollIntoView();
+      }
+
+      function clearInputText() {
+        document.getElementById("textInput").value = "";
+      }
+    </script>
+  </body>
+</html>
